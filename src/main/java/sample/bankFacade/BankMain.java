@@ -33,5 +33,4 @@ public class BankMain {
             }
         }, 0, acc.myLong);
     }
-
 }

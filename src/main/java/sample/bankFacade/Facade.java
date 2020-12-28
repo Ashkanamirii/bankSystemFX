@@ -141,7 +141,7 @@ public class Facade {
                 case 4:
                     RegisterOperation.blankspaces();
                     System.out.println("Transaction history:");
-                    String filePathOut = "resources/CustomersHistory.csv";
+                    String filePathOut = "src/main/resources/CustomersHistory.csv";
                     List<String[]> customersInfoList = Database.readDataFromFile(filePathOut);
                     for (String[] s : customersInfoList) {
                         long accountNumber = Long.parseLong(s[0]);

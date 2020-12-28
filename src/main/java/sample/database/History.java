@@ -25,7 +25,7 @@ public class History {
 
     public static void replaceSelected(String target, String replacement) {
         try {
-            BufferedReader file = new BufferedReader(new FileReader("resources/CustomerList.csv"));
+            BufferedReader file = new BufferedReader(new FileReader("src/main/resources/CustomerList.csv"));
             StringBuffer inputBuffer = new StringBuffer();
             String line;
 
@@ -38,7 +38,7 @@ public class History {
 
                 inputStr = inputStr.replace(target, replacement);
 
-            FileOutputStream fileOut = new FileOutputStream("resources/CustomerList.csv");
+            FileOutputStream fileOut = new FileOutputStream("src/main/resources/CustomerList.csv");
             fileOut.write(inputStr.getBytes());
             fileOut.close();
 
@@ -48,7 +48,7 @@ public class History {
     }
 
     public static void historyLog(Customer customer, double amount , int action, int action1 , String desFullName) {
-        String filePathOut = "resources/CustomersHistory.csv";
+        String filePathOut = "src/main/resources/CustomersHistory.csv";
         String textToAppend = customer.historyToString(action, action1,amount, desFullName);
         Database.AddDataToFile(filePathOut, textToAppend);
     }

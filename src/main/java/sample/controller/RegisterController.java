@@ -1,4 +1,4 @@
-package sample;
+package sample.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.DatabaseConnection;
 
 import java.io.File;
 import java.net.URL;
@@ -60,7 +61,8 @@ public class RegisterController implements Initializable {
     }
 
     public void registerCustomer() {
-        //DatabaseConnection connectNow = new DatabaseConnection();
+        DatabaseConnection connectNow = new DatabaseConnection();
+
     }
 
 }

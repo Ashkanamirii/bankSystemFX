@@ -1,4 +1,4 @@
-package sample;
+package sample.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +14,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.DatabaseConnection;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -47,7 +51,7 @@ public class LoginController implements Initializable {
     public void loginButtonOnAction(ActionEvent event) {
 
         if(!enterUserNameField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
-            loginMessageLabel.setText("You try to login");
+            //loginMessageLabel.setText("You try to login");
             validLogin();
         }else {
             loginMessageLabel.setText("Please enter username and password");
@@ -60,7 +64,32 @@ public class LoginController implements Initializable {
     }
 
     public void validLogin(){
+        DatabaseConnection connection = new DatabaseConnection();
+        Connection connectionDB = connection.getConnection();
 
+        String verifyLogin = "SELECT count(1) FROM customer WHERE personal_number = '" +enterUserNameField.getText()+ "' AND pin_code ='" +
+                enterPasswordField.getText() + "'";
+
+        String emps = "SELECT FROM customer WHERE personal_number = '" +enterUserNameField.getText()+ "' AND pin_code ='" +
+                enterPasswordField.getText() + "'";
+
+        System.out.println(emps);
+        try {
+            Statement statement = connectionDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+
+            while (queryResult.next()){
+                if (queryResult.getInt(1) == 1){
+                    loginMessageLabel.setText("Congratulation");
+                }else {
+                    loginMessageLabel.setText("Invalid login. please try again");
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
     }
     public void registerButtonAction(ActionEvent event){
         creatAccount();

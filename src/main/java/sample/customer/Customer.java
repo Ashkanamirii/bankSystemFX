@@ -25,6 +25,7 @@ public class Customer {
     private double salary;
 
 
+
     public Customer(int customerId, String firstName, String lastName, Account account,
                     short customerPinCode, AccountEnum accountEnum) {
         this.customerId = customerId;

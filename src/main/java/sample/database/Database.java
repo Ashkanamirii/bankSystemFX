@@ -51,7 +51,7 @@ public class Database {
     }
 
     public List<Customer> addDataToCustomerList(){
-        String csVFile = "resources/CustomerList.csv";
+        String csVFile = "src/main/resources/CustomerList.csv";
         List<String[]> newAccountHolders = readDataFromFile(csVFile);
         List<Customer> customerList = new ArrayList<>();
         for (String[] accountHolder : newAccountHolders) {

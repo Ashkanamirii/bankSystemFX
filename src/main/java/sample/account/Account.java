@@ -14,7 +14,7 @@ import java.util.List;
  * Project: bankSystem
  * Copyright: MIT
  */
-public abstract class Account {
+public  class Account {
     private long accountNumber;
     protected double balance;
     protected String date;
@@ -109,7 +109,14 @@ public abstract class Account {
         }
         printBalance();
     }
-    public abstract void setRate();
+
+    public void setAccountNumber(long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public long getAccountNumber() {
         return accountNumber;

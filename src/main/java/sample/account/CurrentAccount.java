@@ -14,7 +14,7 @@ public class CurrentAccount extends Account implements IInterestRate {
         setRate();
     }
 
-    @Override
+
     public void setRate() {
         rate = (getBaseRate() - 1) / 100;
     }

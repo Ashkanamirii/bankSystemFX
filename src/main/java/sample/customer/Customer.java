@@ -3,7 +3,9 @@ package sample.customer;
 import sample.account.Account;
 import sample.account.AccountEnum;
 import sample.database.History;
+import sample.util.Util;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -16,19 +18,20 @@ import java.util.List;
 
 
 public class Customer {
-    private int customerId;
+    private Long personalNumber;
     private String firstName;
     private String lastName;
-    private Account account;
-    private short customerPinCode;
+    private Account account = new Account();
+    private int customerPinCode;
+    private LocalDate dateOfBirth;
     private AccountEnum accountEnum;
     private double salary;
 
 
 
-    public Customer(int customerId, String firstName, String lastName, Account account,
+    public Customer(Long personalNumber, String firstName, String lastName, Account account,
                     short customerPinCode, AccountEnum accountEnum) {
-        this.customerId = customerId;
+        this.personalNumber = personalNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.account = account;
@@ -37,6 +40,18 @@ public class Customer {
     }
 
     public Customer() {
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setAccountEnum(AccountEnum accountEnum) {
+        this.accountEnum = accountEnum;
     }
 
     public AccountEnum getAccountEnum() {
@@ -56,20 +71,20 @@ public class Customer {
         this.salary = salary;
     }
 
-    public short getCustomerPinCode() {
+    public int getCustomerPinCode() {
         return customerPinCode;
     }
 
-    public void setCustomerPinCode(short customerPinCode) {
+    public void setCustomerPinCode(int customerPinCode) {
         this.customerPinCode = customerPinCode;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Long getPersonalNumber() {
+        return personalNumber;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setPersonalNumber(Long personalNumber) {
+        this.personalNumber = personalNumber;
     }
 
     public String getFirstName() {
@@ -100,7 +115,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId=" + customerId +
+                "customerId=" + personalNumber +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", account=" + account +
@@ -112,7 +127,7 @@ public class Customer {
 
     public String customerRegisterInfoShowToUser() {
         return "Welcome " + firstName + ' ' + lastName +
-                "\nYour customerID: " + customerId +
+                "\nYour customerID: " + personalNumber +
                 "\nYour pin code: " + customerPinCode + "\n" +
                 "\nYour " + accountEnum.getDescription() + "s number is ---> " + account.getAccountNumber() +
                 "\n ------------------------------------" + "\n";
@@ -125,14 +140,14 @@ public class Customer {
                 AccountEnum.getAccountType(typeOfTransaction).getDescription() + "; " +
                 amount + "; " +
                 account.getBalance() + "; " + desName + ";"+
-                History.getDateNowFormat();
+                Util.getDateNowFormat();
     }
 
     public String toStringCustomerList(int typeOfAccount) {
-        return customerId + ";" + customerPinCode + ";" + firstName + ";" +
+        return personalNumber + ";" + customerPinCode + ";" + firstName + ";" +
                 lastName + ";" + getAccount().getAccountNumber() + ";" + account.getBalance() +
                 ";" + salary + ";" + AccountEnum.getAccountType(typeOfAccount).getDescription() + ";" +
-                History.getDateNowFormat();
+                Util.getDateNowFormat();
     }
 
     public String[] customerAccountListToString(List<Customer> customerList) {

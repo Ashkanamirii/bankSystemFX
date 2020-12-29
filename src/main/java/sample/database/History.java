@@ -17,11 +17,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class History {
 
-    public static String getDateNowFormat() {
-        LocalDateTime DateNow = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return DateNow.format(formatter);
-    }
+
 
     public static void replaceSelected(String target, String replacement) {
         try {

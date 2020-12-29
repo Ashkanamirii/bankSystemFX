@@ -3,7 +3,6 @@ package sample.bankFacade;
 import sample.account.Account;
 import sample.account.AccountEnum;
 import sample.customer.Customer;
-import sample.customer.RegisterOperation;
 import sample.database.Database;
 import sample.database.History;
 
@@ -20,14 +19,13 @@ public class Facade {
 
     List<Customer> customerFromDB = new ArrayList<>();
     protected Database dataDB = new Database();
-    RegisterOperation registerOperation;
+
 
     public Facade() {
         welcomeDialogue();
     }
 
     public void welcomeDialogue() {
-        registerOperation = new RegisterOperation();
 
         try {
             customerFromDB = dataDB.addDataToCustomerList();
@@ -52,7 +50,6 @@ public class Facade {
                     welcomeDialogue();
                 } else {
                     Customer c = checkInputInfo(inputCustomerID, inputCustomerPinCode);
-                    RegisterOperation.blankspaces();
                     System.out.println("Welcome " + c.getFirstName() + " " + c.getLastName() + "\n");
                     System.out.println("Choose an account to make transactions");
                     System.out.println("1. Savings account");
@@ -61,7 +58,6 @@ public class Facade {
                     System.out.println("4. Close session");
                     int choice = (int) getInfoFromUser();
                     if (choice == 1 || choice == 2 || choice == 3) {
-                        RegisterOperation.blankspaces();
                         List<Customer> customerListOfAcc = new ArrayList<>();
                         customerListOfAcc = getChosenAccount(inputCustomerID, inputCustomerPinCode, choice);
                         System.out.println(" Pleas enter your selected account number that you want to continue with!");
@@ -107,14 +103,14 @@ public class Facade {
                     System.out.println("Please introduce the amount you want to deposit");
                     amount = getAmountFromUser();
                     makeDeposit(amount, customer.getAccount(), customer);
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 2:
                     System.out.println("Please introduce the amount you want to withdraw");
                     amount = getAmountFromUser();
                     makeWithdraw(amount, customer.getAccount(), customer);
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 3:
@@ -135,11 +131,11 @@ public class Facade {
                         System.exit(0);
                     String destFullName = c.getFirstName() + " " + c.getLastName();
                     makeTransfer(amount, customer.getAccount(), destinationAccount, destFullName);
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 4:
-                    RegisterOperation.blankspaces();
+
                     System.out.println("Transaction history:");
                     String filePathOut = "src/main/resources/CustomersHistory.csv";
                     List<String[]> customersInfoList = Database.readDataFromFile(filePathOut);
@@ -151,12 +147,12 @@ public class Facade {
                                     + " | Transfer To--->"+ s[5]+" | Datestamp:" + s[6] + "\n");
                         }
                     }
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 5:
                     customer.getAccount().printBalance();
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 6:
@@ -164,7 +160,7 @@ public class Facade {
                             "Please enter your new pin code! ");
                     String newPinCode = String.valueOf(getInfoFromUser());
                     History.replaceSelected(String.valueOf(customer.getCustomerPinCode()), newPinCode);
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
                 case 7:
                     System.out.println("Savings calculator\n " +
@@ -175,7 +171,7 @@ public class Facade {
                     System.out.println("How long(year) you want to save?");
                     int year = (int) getInfoFromUser();
                     customer.getAccount().balanceWithRate(amountFromUser,year);
-                    registerOperation.continueORquit();
+                    //registerOperation.continueORquit();
                     break;
 
                 case 0:
@@ -203,7 +199,7 @@ public class Facade {
     }
 
     public void makeNewCustomer() {
-        registerOperation.registerNewCustomer();
+        //registerOperation.registerNewCustomer();
     }
 
     public double getAmountFromUser() {
@@ -227,7 +223,7 @@ public class Facade {
         }
         for (int i = 0; i < customerFromDB.size(); i++) {
             if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode
-                    && customerFromDB.get(i).getCustomerId() == inputCustomerID)
+                    && customerFromDB.get(i).getPersonalNumber() == inputCustomerID)
                 if (customerFromDB.get(i).getAccountEnum().getAccountType() == 1) {
                     Customer c = customerFromDB.get(i);
                     return c;
@@ -253,7 +249,7 @@ public class Facade {
     public List<Customer> getChosenAccount(int inputCustomerID, int inputCustomerPinCode, int choice) {
         List<Customer> oneCustLoList = new ArrayList<>();
         for (int i = 0; i < customerFromDB.size(); i++) {
-            if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode && customerFromDB.get(i).getCustomerId() == inputCustomerID) {
+            if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode && customerFromDB.get(i).getPersonalNumber() == inputCustomerID) {
                 if (customerFromDB.get(i).getAccountEnum().getAccountType() == 1 && choice == 1) {
                     oneCustLoList.add(customerFromDB.get(i));
                 } else if (customerFromDB.get(i).getAccountEnum().getAccountType() == 2 && choice == 2) {

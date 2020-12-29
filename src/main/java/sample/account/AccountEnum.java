@@ -9,8 +9,9 @@ package sample.account;
  */
 public enum AccountEnum {
 
-    SAVING_ACCOUNT(1, "Saving account"),
-    CURRENT_ACCOUNT(2, "Current account"),
+    SAVING_ACCOUNT(0, "Saving account"),
+    CURRENT_ACCOUNT(1, "Current account"),
+    CREDIT_ACCOUNT(2, "Credit account"),
     DEPOSIT(3, "Make a deposit"),
     WITHDRAW(4, "Withdraw"),
     TRANSFER(5, "Make a transfer"),
@@ -18,11 +19,10 @@ public enum AccountEnum {
     CHECK_BALANCE(7, "Check your balance"),
     UPDATE_INFO(8, "Update your personal information"),
     LOGOUT(9, "Log out"),
-    CREDIT_ACCOUNT(10, "Credit account"),
-    SAVINGS_CALCULATOR(11, "Savings calculator"),
+    SAVINGS_CALCULATOR(10, "Savings calculator"),
 
 
-    UNKNOWN(0, "Unknown");
+    UNKNOWN(-1, "Unknown");
 
 
     private final int accountType;
@@ -50,6 +50,6 @@ public enum AccountEnum {
             if (value.getAccountType() == code)
                 return value;
         }
-        return AccountEnum.getAccountType(0);
+        return AccountEnum.getAccountType(-1);
     }
 }

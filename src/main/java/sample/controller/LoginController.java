@@ -1,11 +1,7 @@
 package sample.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -13,11 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import sample.DatabaseConnection;
-
+import sample.util.Util;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,6 +27,7 @@ public class LoginController implements Initializable {
     public TextField enterUserNameField;
     public ImageView lockImageView;
     public ImageView ashkanBankImageView;
+    Util u = new Util();
 
 
     @Override
@@ -44,9 +39,7 @@ public class LoginController implements Initializable {
         File lockImageFile = new File("Images/lock.png");
         Image lockImage = new Image(lockImageFile.toURI().toString());
         lockImageView.setImage(lockImage);
-
     }
-    
 
     public void loginButtonOnAction(ActionEvent event) {
 
@@ -66,14 +59,9 @@ public class LoginController implements Initializable {
     public void validLogin(){
         DatabaseConnection connection = new DatabaseConnection();
         Connection connectionDB = connection.getConnection();
-
-        String verifyLogin = "SELECT count(1) FROM customer WHERE personal_number = '" +enterUserNameField.getText()+ "' AND pin_code ='" +
-                enterPasswordField.getText() + "'";
-
-        String emps = "SELECT FROM customer WHERE personal_number = '" +enterUserNameField.getText()+ "' AND pin_code ='" +
-                enterPasswordField.getText() + "'";
-
-        System.out.println(emps);
+        String verifyLogin = "SELECT count(1) FROM customer WHERE personal_number = '"
+                + enterUserNameField.getText() + "' AND pin_code ='"
+                + enterPasswordField.getText() + "'";
         try {
             Statement statement = connectionDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
@@ -81,6 +69,8 @@ public class LoginController implements Initializable {
             while (queryResult.next()){
                 if (queryResult.getInt(1) == 1){
                     loginMessageLabel.setText("Congratulation");
+                    //TODO: creat main menu
+                    //mainMenu();
                 }else {
                     loginMessageLabel.setText("Invalid login. please try again");
                 }
@@ -92,22 +82,6 @@ public class LoginController implements Initializable {
         }
     }
     public void registerButtonAction(ActionEvent event){
-        creatAccount();
+        u.loadViews("register", loginMessageLabel);
     }
-
-    public void creatAccount(){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("register.fxml"));
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root, 600, 535));
-            registerStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
 }

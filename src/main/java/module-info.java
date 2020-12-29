@@ -9,7 +9,14 @@
     requires javafx.graphics;
     requires javafx.fxml;
     requires java.sql;
+    requires com.jfoenix;
 
     opens sample;
     opens sample.controller;
+    opens sample.account;
+    opens sample.customer;
+    opens sample.bankFacade;
+    opens sample.database;
+    opens sample.util;
+
 }

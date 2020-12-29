@@ -20,7 +20,7 @@ public class CreditAccount extends Account {
     public CreditAccount() {
     }
 
-    @Override
+
     public void setRate() {
     }
 

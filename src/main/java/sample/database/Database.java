@@ -57,7 +57,7 @@ public class Database {
         for (String[] accountHolder : newAccountHolders) {
             Customer customer = new Customer();
             int customerID = Integer.parseInt(accountHolder[0]);
-            customer.setCustomerId(customerID);
+            customer.setPersonalNumber((long) customerID);
             short customerPinCode = Short.parseShort(accountHolder[1]);
             customer.setCustomerPinCode(customerPinCode);
             String firstName = accountHolder[2];

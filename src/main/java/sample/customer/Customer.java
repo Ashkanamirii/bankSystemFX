@@ -18,7 +18,7 @@ import java.util.List;
 
 
 public class Customer {
-    private Long personalNumber;
+    private String personalNumber;
     private String firstName;
     private String lastName;
     private Account account = new Account();
@@ -29,7 +29,7 @@ public class Customer {
 
 
 
-    public Customer(Long personalNumber, String firstName, String lastName, Account account,
+    public Customer(String personalNumber, String firstName, String lastName, Account account,
                     short customerPinCode, AccountEnum accountEnum) {
         this.personalNumber = personalNumber;
         this.firstName = firstName;
@@ -79,11 +79,11 @@ public class Customer {
         this.customerPinCode = customerPinCode;
     }
 
-    public Long getPersonalNumber() {
+    public String getPersonalNumber() {
         return personalNumber;
     }
 
-    public void setPersonalNumber(Long personalNumber) {
+    public void setPersonalNumber(String personalNumber) {
         this.personalNumber = personalNumber;
     }
 

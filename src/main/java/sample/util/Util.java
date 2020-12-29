@@ -29,7 +29,7 @@ public class Util {
         return rand.nextInt(upperBound - lowerBound) + lowerBound;
     }
 
-    public  void loadViews(String FXMLFileName, Label logOutLabel){
+    public void loadViews(String FXMLFileName, Label logOutLabel) {
         try {
             // Detta är för att stänga föregående scene och ladda en ny
             Stage stage = (Stage) logOutLabel.getScene().getWindow();
@@ -44,6 +44,7 @@ public class Util {
             e.printStackTrace();
         }
     }
+
     public static String getDateNowFormat() {
         LocalDateTime DateNow = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -67,14 +68,20 @@ public class Util {
         c.getAccount().setAccountNumber(accNr);
         System.out.println(c.getAccount().getAccountNumber());
 
-        String custID = "SELECT customer_id FROM customer ORDER BY customer_id DESC limit 1";
-        int cust_id = Integer.parseInt(custID);
 
-        String customerInsert = "INSERT INTO customer(FIRST_NAME,LAST_NAME,PERSONAL_NUMBER,DATE_OF_BIRTH,SALARY,PIN_CODE) VALUES('"
-                + c.getFirstName() + "','" + c.getLastName() + "','" + c.getPersonalNumber() + "','" + c.getDateOfBirth() + "','" + c.getSalary() + "','" + c.getCustomerPinCode() + "')";
+        String customerInsert = "INSERT INTO customer(FIRST_NAME,LAST_NAME,PERSONAL_NUMBER,DATE_OF_BIRTH" +
+                ",SALARY,PIN_CODE,CREAT_DATE,MODIFY_DATE) VALUES('"
+                + c.getFirstName() + "','" + c.getLastName() + "','"
+                + c.getPersonalNumber() + "','" + c.getDateOfBirth()
+                + "','" + c.getSalary() + "','" + c.getCustomerPinCode()
+                + "','" + getDateNowFormat() + "','" + getDateNowFormat() + "')";
 
-        String accountInsert = "INSERT INTO account(ACCOUNT_NUMBER,BALANCE,CREAT_DATE,MODIFY_DATE,ACCOUNT_TYPE,customer_id) VALUES('"
-                + c.getAccount().getAccountNumber() + "','" + 0 + "','" + getDateNowFormat() + "','" + getDateNowFormat() + "','" + c.getAccountEnum().getAccountType() + "','" + cust_id +
+        String accountInsert = "INSERT INTO account(ACCOUNT_NUMBER,BALANCE" +
+                ",CREAT_DATE,MODIFY_DATE,ACCOUNT_TYPE,customer_nr) VALUES('"
+                + c.getAccount().getAccountNumber() + "','" + 0 + "','"
+                + getDateNowFormat() + "','" + getDateNowFormat()
+                + "','" + c.getAccountEnum().getAccountType()
+                + "','" + c.getPersonalNumber() +
                 "')";
         try {
             Statement statement = connectionDB.createStatement();

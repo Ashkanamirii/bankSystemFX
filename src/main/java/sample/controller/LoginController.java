@@ -44,7 +44,6 @@ public class LoginController implements Initializable {
     public void loginButtonOnAction(ActionEvent event) {
 
         if(!enterUserNameField.getText().isBlank() && !enterPasswordField.getText().isBlank()){
-            //loginMessageLabel.setText("You try to login");
             validLogin();
         }else {
             loginMessageLabel.setText("Please enter username and password");
@@ -70,7 +69,7 @@ public class LoginController implements Initializable {
                 if (queryResult.getInt(1) == 1){
                     loginMessageLabel.setText("Congratulation");
                     //TODO: creat main menu
-                    //mainMenu();
+                    mainMenu();
                 }else {
                     loginMessageLabel.setText("Invalid login. please try again");
                 }
@@ -83,5 +82,8 @@ public class LoginController implements Initializable {
     }
     public void registerButtonAction(ActionEvent event){
         u.loadViews("register", loginMessageLabel);
+    }
+    public void mainMenu(){
+        u.loadViews("mainMenu", loginMessageLabel);
     }
 }

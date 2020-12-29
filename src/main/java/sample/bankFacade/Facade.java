@@ -223,7 +223,7 @@ public class Facade {
         }
         for (int i = 0; i < customerFromDB.size(); i++) {
             if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode
-                    && customerFromDB.get(i).getPersonalNumber() == inputCustomerID)
+                    && customerFromDB.get(i).getPersonalNumber().equals(inputCustomerID))
                 if (customerFromDB.get(i).getAccountEnum().getAccountType() == 1) {
                     Customer c = customerFromDB.get(i);
                     return c;
@@ -249,7 +249,7 @@ public class Facade {
     public List<Customer> getChosenAccount(int inputCustomerID, int inputCustomerPinCode, int choice) {
         List<Customer> oneCustLoList = new ArrayList<>();
         for (int i = 0; i < customerFromDB.size(); i++) {
-            if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode && customerFromDB.get(i).getPersonalNumber() == inputCustomerID) {
+            if (customerFromDB.get(i).getCustomerPinCode() == inputCustomerPinCode && customerFromDB.get(i).getPersonalNumber().equals(inputCustomerID)) {
                 if (customerFromDB.get(i).getAccountEnum().getAccountType() == 1 && choice == 1) {
                     oneCustLoList.add(customerFromDB.get(i));
                 } else if (customerFromDB.get(i).getAccountEnum().getAccountType() == 2 && choice == 2) {

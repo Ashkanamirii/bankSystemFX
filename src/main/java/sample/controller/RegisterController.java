@@ -81,7 +81,7 @@ public class RegisterController implements Initializable {
             customer.setAccountType(AccountEnum.getAccountType(1));
         else if (accountChoiceBox.getValue() == "CREDIT")
             customer.setAccountType(AccountEnum.getAccountType(2));
-        customer.setPersonalNumber(Long.valueOf(personalNumberTextField.getText()));
+        customer.setPersonalNumber(personalNumberTextField.getText());
         customer.setDateOfBirth(dateOfBirthBox.getValue());
         return customer;
     }
